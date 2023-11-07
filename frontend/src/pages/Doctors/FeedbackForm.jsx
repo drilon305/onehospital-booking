@@ -6,6 +6,12 @@ const FeedbackForm = () => {
   const [hover, setHover] = useState(0);
   const [reviewText, setReviewText] = useState('');
 
+  const handleSubmitReview = async e => {
+    e.preventDefault();
+
+
+  }
+
   return (
     <form action="">
       <div>
@@ -57,7 +63,7 @@ const FeedbackForm = () => {
         ></textarea>
       </div>
 
-      <button type='' className='btn'>Submit Feedback</button>
+      <button type='submit' onClick={handleSubmitReview} className='btn'>Submit Feedback</button>
     </form>
   );
 };
