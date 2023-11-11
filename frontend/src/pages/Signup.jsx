@@ -1,7 +1,37 @@
 import signupImg from '../assets/images/signup.gif'
 import avatar from '../assets/images/doctor-img01.png'
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const Signup = () => {
+
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [previewUrl, setPreviewUrl] = useState('')
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+    photo: selectedFile,
+    gender: "",
+    role: "patient"
+  });
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+
+  const handleFileInputChange = async (event) => {
+      const file = event.target.files[0];
+
+  }
+
+
+
+  const submitHandler = async event => {
+    event.preventDefault();
+  }
+
   return (
     <section className="px-5 xl:px-0">
       <div className="max-w-[1170px] mx-auto">
@@ -17,13 +47,14 @@ const Signup = () => {
               Create an <span className="text-primaryColor">account</span>
             </h3>
 
-            <form>
+            <form onSubmit={submitHandler}>
               <div className="mb-5">
                 <input
                   type="text"
                   name="name"
                   placeholder="Full Name"
-                  value=""
+                  value={formData.name}
+                  onChange={handleInputChange}
                   className="w-full py-3 pr-4  border-b border-solid border-[#0066ff61] focus:outline-none
                focus:border-b-primaryColor text-[16px] leading-7 text-textColor placeholder:text-textColor
                  cursor-pointer"
@@ -36,7 +67,8 @@ const Signup = () => {
                   type="email"
                   name="email"
                   placeholder="Enter your email"
-                  value=""
+                  value={formData.email}
+                  onChange={handleInputChange}
                   className="w-full py-3 pr-4  border-b border-solid border-[#0066ff61] focus:outline-none
                focus:border-b-primaryColor text-[16px] leading-7 text-textColor placeholder:text-textColor
                  cursor-pointer"
@@ -49,7 +81,8 @@ const Signup = () => {
                   type="password"
                   name="password"
                   placeholder="Password"
-                  value=""
+                  value={formData.password}
+                  onChange={handleInputChange}
                   className="w-full py-3 pr-4  border-b border-solid border-[#0066ff61] focus:outline-none
                focus:border-b-primaryColor text-[16px] leading-7 text-textColor placeholder:text-textColor
                  cursor-pointer"
@@ -62,6 +95,8 @@ const Signup = () => {
                   Are you a:
                   <select
                     name="role"
+                    value={formData.role}
+                  onChange={handleInputChange}
                     className="text-textColor text-[15px] font-semibold
                leading-7 px-4 py-3 focus:outline-none"
                   >
@@ -74,6 +109,8 @@ const Signup = () => {
                   Gender:
                   <select
                     name="role"
+                    value={formData.gender}
+                  onChange={handleInputChange}
                     className="text-textColor text-[15px] font-semibold
                leading-7 px-4 py-3 focus:outline-none"
                   >
@@ -101,6 +138,7 @@ const Signup = () => {
                     type="file"
                     name="photo"
                     id="customFile"
+                    onChange={handleFileInputChange}
                     accept=".jpg, .png"
                     className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer"
                   />
@@ -114,6 +152,24 @@ const Signup = () => {
                   </label>
                 </div>
               </div>
+
+              
+          <div className="mt-7">
+            <button
+              type="submit"
+              className="w-full bg-primaryColor px-4 py-3 rounded-lg text-white
+             text-[18px] leading-[30px]"
+            >
+              Sign Up
+            </button>
+          </div>
+
+          <p className="mt-5 text-center text-textColor">
+            Already have an account?{" "}
+            <Link to="/login" className="text-primaryColor font-medium ml-1">
+              Login
+            </Link>
+          </p>
             </form>
           </div>
         </div>
