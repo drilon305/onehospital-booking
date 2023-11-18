@@ -17,7 +17,6 @@ export const authenticate = async (req, res, next) => {
         req.userId = decoded.id
         req.role = decoded.role
 
-
         next()
     } catch (err) {
         if(err.name === 'TokenExpiredError') {
@@ -33,7 +32,7 @@ export const restrict = roles => async (req, res, next) => {
     let user;
 
     const patient = await User.findById(userId)
-    const doctor = await User.findById(userId)
+    const doctor = await Doctor.findById(userId)
 
     if(patient) {
         user = patient

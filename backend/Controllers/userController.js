@@ -13,7 +13,7 @@ export const updateUser = async(req, res) => {
     }
 }
 
-export const deletUser = async(req, res) => {
+export const deleteUser = async(req, res) => {
     const id = req.params.body;
 
 
