@@ -5,6 +5,7 @@ import { useState } from 'react';
 import uploadImageToCloudinary from '../utils/uploadCloudinary';
 import { BASE_URL } from '../config';
 import { toast } from 'react-toastify'
+import HashLoader from 'react-spinners/HashLoader'
 
 const Signup = () => {
 
@@ -46,7 +47,7 @@ const Signup = () => {
     setLoading(true)
 
     try {
-      const res = await fetch(B`${BASE_URL}/auth/register`, {
+      const res = await fetch(`${BASE_URL}/auth/register`, {
         method: 'post',
         headers: {
           'Content-Type': 'application/json'
@@ -66,6 +67,7 @@ const Signup = () => {
 
     } catch (err) {
       toast.error(err.message)
+      console.log(err.message)
       setLoading(false)
     }
   }
@@ -194,11 +196,12 @@ const Signup = () => {
               
           <div className="mt-7">
             <button
+            disabled={loading && true}
               type="submit"
               className="w-full bg-primaryColor px-4 py-3 rounded-lg text-white
              text-[18px] leading-[30px]"
             >
-              Sign Up
+              {loading ? <HashLoader size={35}  color='#ffffff'/> : 'Sign Up'}
             </button>
           </div>
 
