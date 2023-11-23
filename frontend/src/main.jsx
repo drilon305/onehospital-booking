@@ -5,10 +5,12 @@ import App from './App.jsx'
 import './index.css'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
+import { AuthContextProvider } from './context/AuthContext.jsx'
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
+  <AuthContextProvider>
     <ToastContainer
       theme="dark"
       position="top-right"
@@ -17,5 +19,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       pauseOnHover={false}
     />
     <App />
+    </AuthContextProvider>
   </BrowserRouter>
 );
