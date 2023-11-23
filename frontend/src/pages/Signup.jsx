@@ -148,7 +148,7 @@ const Signup = () => {
                 <label className="text-headingColor font-bold text-[16px] leading-7">
                   Gender:
                   <select
-                    name="role"
+                    name="gender"
                     value={formData.gender}
                   onChange={handleInputChange}
                     className="text-textColor text-[15px] font-semibold
