@@ -58,40 +58,50 @@ export const register = async(req, res) => {
     }
 }
 
-export const login = async(req, res) => {
+export const login = async (req, res) => {
+  const { email } = req.body;
 
-    const {email} = req.body
+  try {
+    let user = null;
 
-    try {
+    const patient = await User.findOne({ email });
+    const doctor = await Doctor.findOne({ email });
 
-        let user = null;
-
-        const patient = await User.findOne({email})
-        const doctor = await Doctor.findOne({email})
-
-        if(patient) {
-            user = patient
-        }
-        if(doctor) {
-            user = doctor
-        }
-
-        if(!user) {
-            return res.status(404).json({message: 'User not found'})
-        }
-
-        const isPasswordMatch = await bcrypt.compare(req.body.password, user.password);
-        
-        if(!isPasswordMatch) {
-            return res.status(400).json({status: false, message: 'Invalid credentials'})
-        }
-
-        const token = generateToken(user);
-
-        const {password, role, appoinments, ...rest} = user._doc
-        res.status(200).json({status: true, message: 'Successfully login', token, data:{...rest}, role})
-       
-    } catch (error) {
-        res.status(500).json({status: false, message: 'Failed to login'})
+    if (patient) {
+      user = patient;
     }
-}
+    if (doctor) {
+      user = doctor;
+    }
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+
+    if (!isPasswordMatch) {
+      return res
+        .status(400)
+        .json({ status: false, message: "Invalid credentials" });
+    }
+
+    const token = generateToken(user);
+
+    const { password, role, appoinments, ...rest } = user._doc;
+    res
+      .status(200)
+      .json({
+        status: true,
+        message: "Successfully login",
+        token,
+        data: { ...rest },
+        role,
+      });
+  } catch (error) {
+    res.status(500).json({ status: false, message: "Failed to login" });
+  }
+};
