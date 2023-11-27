@@ -7,6 +7,8 @@ import MyBookings from './MyBookings';
 import Profile from './Profile';
 
 import Loading from '../../components/Loader/Loading';
+import Error from '../../components/Error/Error';
+
 import { BASE_URL } from '../../config';
 
 const MyAccount = () => {
@@ -27,9 +29,9 @@ const MyAccount = () => {
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
 
-    {loading && <Loading />}
+    {loading && !error && <Loading />}
 
-    
+    {error && !loading && <Error errMessage={error} />}
 
         {!loading && !error && (
           <div className="grid md:grid-cols-3 gap-10">
