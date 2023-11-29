@@ -27,10 +27,9 @@ const MyAccount = () => {
   return (
     <section>
       <div className="max-w-[1170px] px-5 mx-auto">
+        {loading && !error && <Loading />}
 
-    {loading && !error && <Loading />}
-
-    {error && !loading && <Error errMessage={error} />}
+        {error && !loading && <Error errMessage={error} />}
 
         {!loading && !error && (
           <div className="grid md:grid-cols-3 gap-10">
@@ -53,7 +52,7 @@ const MyAccount = () => {
                   {userData.email}
                 </p>
                 <p className="text-textColor font-medium text-[15px] leading-6 ">
-                  Blood type:{" "}
+                  Blood type:
                   <span className="ml-2 text-textColor leading-8 text-[20px]">
                     {userData.bloodType}
                   </span>
@@ -97,7 +96,11 @@ const MyAccount = () => {
                 </button>
               </div>
 
-              {tab === "bookings" ? <MyBookings /> : <Profile user={userData} />}
+              {tab === "bookings" ? (
+                <MyBookings />
+              ) : (
+                <Profile user={userData} />
+              )}
             </div>
           </div>
         )}

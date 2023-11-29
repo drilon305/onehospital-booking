@@ -27,6 +27,7 @@ const handleInputChange = (e) => {
   setFormData({ ...formData, [e.target.name]: e.target.value });
 };
 
+
 const handleFileInputChange = async (event) => {
     const file = event.target.files[0];
 
@@ -131,21 +132,6 @@ const submitHandler = async event => {
 
               <div className="mb-5 flex items-center justify-between">
                
-
-                <label className="text-headingColor font-bold text-[16px] leading-7">
-                  Gender:
-                  <select
-                    name="gender"
-                    value={formData.gender}
-                  onChange={handleInputChange}
-                    className="text-textColor text-[15px] font-semibold
-               leading-7 px-4 py-3 focus:outline-none"
-                  >
-                    <option value="">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                  </select>
-                </label>
               </div>
 
               <div className="mb-5 flex items-center gap-3">
